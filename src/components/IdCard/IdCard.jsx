@@ -1,17 +1,31 @@
-function IdCard ({lastName, firstName, gender, height, birth, picture}) {
-    return(
-        <div className="card">
-         <img src={picture} alt={`${firstName} ${lastName}`} />
-        <p><strong>First name:</strong> {firstName}</p>
-        <p><strong>Last name:</strong> {lastName}</p>
-        <p><strong>Gender:</strong> {gender}</p>
-        <p><strong>Height:</strong> {height}cm</p>
-        <p><strong>Birth:</strong> {birth.toDateString()}</p>
-      </div>
-        </div>
-     
+import PropTypes from 'prop-types';
+import './IdCard.css';
+
+const IdCard = ({ lastName, firstName, gender, height, birth, picture }) => {
+  const renderProp = (title, value) => {
+    return (
+      <p><strong>{title}</strong>: {value}</p>
     )
-    
+  }
+  return (
+    <div className="IdCard">
+      <div>
+        <img src={picture} alt={firstName} />
+      </div>
+      <div className="IdCard-body">
+        {renderProp('First name', firstName)}
+        {renderProp('Last name', lastName)}
+        {renderProp('Gender', gender)}
+        {renderProp('Height', `${height}cm`)}
+        {renderProp('Birth', birth.toString())}
+      </div>
+    </div>
+  )
+}
+
+IdCard.propTypes = {
+  lastName: PropTypes.string.isRequired,
+  firstName: PropTypes.string.isRequired,
 }
 
 export default IdCard;
